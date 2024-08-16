@@ -11,6 +11,16 @@ Arrays.h (coming soon)
 ```
 use the classic git clone
 ```
+# Setup
+```
+navigate to the folder
+Strings:
+$ gcc -c Strings.c -o Strings.o
+$ ar rcs -libStrings.a Strings.o
+
+!impotant -> while adding new functions, update the header file
+```
 if you wish to make it globally availible make sure you move it to ``` /usr/libs ```
-else, have it in your workspace for the main file compilation ```$ gcc [filename].c -L. -lStrings -o [outfile].o```
-Enjoy hacking!!
+else, have it in your workspace for the main file compilation 
+for strings:```$ gcc [filename].c -L. -lStrings -o [outfile].o```
+happy hacking!!
