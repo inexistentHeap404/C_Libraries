@@ -12,4 +12,5 @@ void lower(char string[]);
 bool stringCompare(char string1[], char string2[]);
 int substr_exists(char string[], char sub_string[]);
 char* stringCopy(char string[]);
+char* stringJoin(char string[], char delim);
 #endif
