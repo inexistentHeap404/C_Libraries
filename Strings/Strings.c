@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<stdbool.h>
 // len -> finds the length of the input string (forms the basis for this lib)
 int len(char string[]){
@@ -51,27 +52,30 @@ int getCount(char string[], char toCount){
 	return count;
 }
 
-// split -> takes in a string, a delimiter and a target char[][] and redirects the split output to the char[][] (NOT YET IMPLEMENTED SOME ERROR WITH THE MALLOC)
+// split -> takes in a string, a delimiter and a target char[][] and returns 2s char array char**
 
 char** split(char string[], char delim){
 	int delim_count = getCount(string, delim);
-	char** out = (char**)malloc(sizeof(char*) * delim_count);
-	char buffer_string[255];
+	char buffer_string[10];
+	char** ret = (char**) malloc(delim_count + 1);
 	int buffer_string_index = 0;
-	int out_index = 0;
-	for(int i = 0; i < len(string); i++){	
-		if(delim == string[i]){
+	int ret_index = 0;
+	for(int i = 0; i < len(string); i++){
+		if(string[i] == delim || string[i + 1] == '\0'){
+			ret[ret_index] = (char*) malloc(len(buffer_string) + 1);
+			buffer_string[buffer_string_index + 1] = '\0';
 			for(int j = 0; j < len(buffer_string); j++){
-				out[out_index][j] = buffer_string[j];
+				ret[ret_index][j] = buffer_string[j];
 			}
-			out_index++;
+			ret[ret_index][len(ret[ret_index])] = '\0';
 			buffer_string_index = 0;
+			ret_index++;
+			continue;
 		}
-		else{
-			buffer_string[buffer_string_index] = string[i];
-		}
+		buffer_string[buffer_string_index] = string[i];
 		buffer_string_index++;
 	}
+	return ret;
 }	
 
 // upper -> takes in a string, and converts it to upper case *(modifies the original string)*
@@ -128,4 +132,27 @@ char* stringCopy(char string[]){
 	return &ret[0];
 }
 
-//
+/* strJoin -> takes in a string and a delimiter as inputs and returns a char* to the joined string 
+ * example :
+ * str = "abcd"
+ * delim = ' ';
+ * join(str, delim) will give an output like -> a b c d
+ */
+char* stringJoin(char string[], char delim){
+	int delim_count = len(string) - 1;
+	char* ret = malloc(len(string) + delim_count + 1);
+	int string_index = 0;
+	for(int i = 0; i < len(string) + delim_count; i++){
+		if(i % 2 == 0){
+			ret[i] = string[string_index];
+			string_index++;
+		}
+		else{
+			ret[i] = delim;
+		}
+	}
+	ret[len(string) + delim_count + 1] = '\0';
+	return ret;
+}
+
+
