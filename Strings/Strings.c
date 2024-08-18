@@ -80,14 +80,24 @@ char** split(char string[], char delim){
 // upper -> takes in a string, and converts it to upper case *(modifies the original string)*
 void upper(char string[]){
 	for(int i = 0; i < len(string); i++){
-		string[i] = (char)((int)string[i] - 32);
+		if((int)string[i] >= 97 || (int)string[i] <= 122){
+			string[i] = (char)((int)string[i] - 32);
+		}
+		else{
+			continue;
+		}
 	}
 }
 
 // lower -> takes in a string, and converts it to lower case *(modifies the original string)*
 void lower(char string[]){
 	for(int i = 0; i < len(string); i++){
-		string[i] = (char)((int)string[i] + 32);
+		if((int)string[i] >= 65 || (int)string[i] <= 90){
+			string[i] = (char)((int)string[i] + 32);
+		}
+		else{
+			continue;
+		}
 	}
 }
 
@@ -153,5 +163,3 @@ char* stringJoin(char string[], char delim){
 	ret[len(string) + delim_count + 1] = '\0';
 	return ret;
 }
-
-
