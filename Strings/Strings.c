@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h>
 #include<stdbool.h>
 // len -> finds the length of the input string (forms the basis for this lib)
 int len(char string[]){
