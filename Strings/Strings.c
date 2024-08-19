@@ -26,6 +26,19 @@ int find(char string[], char to_find){
 		return find_index;
 }
 
+// findLast -> returns the last index of where a char was found
+int findLast(char string[], char to_find){
+	int find_index = 0;
+	int i = 0;
+	while(string[i] != '\0'){
+		if(string[i] == to_find){
+			find_index = i;
+		}
+		i++;
+	}
+	return find_index;
+}
+
 // substr -> extracts the substring from a string from start to end both inclusive and redirects the substring to a string which is already definded in the function the function is used (it does not modify the original string)
 void substr(char string[], int start, int end, char out_string[]){
 	if(len(string) > 0 && start < len(string) && end < len(string) && end - start > 0){
@@ -59,22 +72,27 @@ char** split(char string[], char delim){
 	char** ret = (char**) malloc(delim_count + 1);
 	int buffer_string_index = 0;
 	int ret_index = 0;
-	for(int i = 0; i < len(string); i++){
-		if(string[i] == delim || string[i + 1] == '\0'){
-			ret[ret_index] = (char*) malloc(len(buffer_string) + 1);
-			buffer_string[buffer_string_index + 1] = '\0';
-			for(int j = 0; j < len(buffer_string); j++){
-				ret[ret_index][j] = buffer_string[j];
+	if(delim_count != 0){
+		for(int i = 0; i < len(string); i++){
+			if(string[i] == delim || string[i + 1] == '\0'){
+				ret[ret_index] = (char*) malloc(len(buffer_string) + 1);
+				buffer_string[buffer_string_index + 1] = '\0';
+				for(int j = 0; j < len(buffer_string); j++){
+					ret[ret_index][j] = buffer_string[j];
+				}
+				ret[ret_index][len(ret[ret_index])] = '\0';
+				buffer_string_index = 0;
+				ret_index++;
+				continue;
 			}
-			ret[ret_index][len(ret[ret_index])] = '\0';
-			buffer_string_index = 0;
-			ret_index++;
-			continue;
+			buffer_string[buffer_string_index] = string[i];
+			buffer_string_index++;
 		}
-		buffer_string[buffer_string_index] = string[i];
-		buffer_string_index++;
+		return ret;
 	}
-	return ret;
+	else{
+		return &string;
+	}
 }	
 
 // upper -> takes in a string, and converts it to upper case *(modifies the original string)*
@@ -112,26 +130,24 @@ bool stringCompare(char string1[], char string2[]){
 }
 
 // substr_exists -> takes in a string and a substring and checks if the substring exists in the string(return 1 or -1)
-int substr_exists(char string[], char sub_string[]){
-	int group_size = len(sub_string);
+int substr_exits(char string[], char substr[]){
+	int group_size = len(substr);
 	int index = 0;
-	char buffer_string[len(sub_string)];
+	int string_length = len(string);
+	char buffer_string[len(substr)];
 	int buffer_string_index = 0;
-	int found = 0;
-	while(index + group_size < len(string)){
+	while(group_size + index < string_length){
 		for(int i = index; i < index + group_size; i++){
 			buffer_string[buffer_string_index] = string[i];
 			buffer_string_index++;
 		}
-		if(stringCompare(sub_string, buffer_string)){
+		if(stringCompare(buffer_string, substr)){
 			return 1;
 		}
+		
 		index++;
-		buffer_string_index = 0;	
 	}
-	return 0;
 }
-
 // stringCopy -> takes in a string and copies it to another string, returns a char* to the copied string
 char* stringCopy(char string[]){
 	char* ret = (char*) malloc(len(string));
@@ -161,5 +177,28 @@ char* stringJoin(char string[], char delim){
 		}
 	}
 	ret[len(string) + delim_count + 1] = '\0';
+	return ret;
+}
+
+// stringAppend -> takes in two strings appends the second to the first returns a char*
+/*
+ * example:
+ * str = "ab"
+ * str2 = "cd"
+ * stringAppend(str, str2) -> "abcd"
+ */
+char* stringAppend(char string1[], char string2[]){
+	int total_length = len(string1) + len(string2);
+	char* ret = (char*) malloc(total_length + 1);
+	int str1_len = len(string1);
+	int str2_len = len(string2);
+	int str2_index = 0;
+	for(int i = 0; i < str1_len; i++){
+		ret[i] = string1[i];
+	}
+	for(int i = str1_len; i < total_length; i++){
+		ret[i] = string2[str2_index];
+		str2_index++;
+	}
 	return ret;
 }
