@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include<math.h>
 // len -> finds the length of the input string (forms the basis for this lib)
 int len(char string[]){
 	int length = 0;
@@ -218,5 +219,16 @@ void stringInsert(char string[], char insertString[],  int insertIndex){
 	for(int i = 0; i < insertString_length; i++){
 		stringCharInsert(string, insertString[i], insertIndex);
 		insertIndex++;
+	}
+}
+
+//stringRevrse -> takes in a string and reverses the string (modifies the original string)
+void stringReverse(char string[]){
+	char temp;
+	int string_length = len(string);
+	for(int i = 0; i < string_length / 2; i++){
+		temp = string[i];
+		string[i] = string[string_length - i - 1];	
+		string[string_length - i - 1] = temp;
 	}
 }

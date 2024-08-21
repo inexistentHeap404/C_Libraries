@@ -1,7 +1,6 @@
 #include<stdbool.h>
 #ifndef STRINGS_H
 #define STRINGS_H
-
 int len(char string[]);
 int find(char string[], char to_find);
 int findLast(char string[], char to_find);
@@ -17,4 +16,5 @@ char* stringJoin(char string[], char delim);
 char* stringAppend(char string1[], char string2[]);
 void stringCharInsert(char string[], char insertChar, int insertIndex);
 void stringInsert(char string[], char insertString[], int insertIndex);
+void stringReverse(char string[]);
 #endif
