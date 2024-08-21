@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+
 // len -> finds the length of the input string (forms the basis for this lib)
 int len(char string[]){
 	int length = 0;
@@ -229,5 +230,20 @@ void stringReverse(char string[]){
 		temp = string[i];
 		string[i] = string[string_length - i - 1];	
 		string[string_length - i - 1] = temp;
+	}
+}
+
+//stringSort -> takes in a string and sorts it according to ascii (modifies the original string
+void stringSort(char string[]){
+	char temp;
+	int string_length = len(string);
+	for(int i = 0; i < string_length; i++){
+		for(int j = i + 1; j < string_length; j++){
+			if((int)string[i] > (int)string[j]){
+				temp = string[i];
+				string[i] = string[j];
+				string[j] = temp;
+			}
+		}
 	}
 }

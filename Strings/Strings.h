@@ -17,4 +17,5 @@ char* stringAppend(char string1[], char string2[]);
 void stringCharInsert(char string[], char insertChar, int insertIndex);
 void stringInsert(char string[], char insertString[], int insertIndex);
 void stringReverse(char string[]);
+void stringSort(char string[]);
 #endif
