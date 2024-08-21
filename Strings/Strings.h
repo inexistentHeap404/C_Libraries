@@ -15,4 +15,6 @@ int substr_exists(char string[], char sub_string[]);
 char* stringCopy(char string[]);
 char* stringJoin(char string[], char delim);
 char* stringAppend(char string1[], char string2[]);
+void stringCharInsert(char string[], char insertChar, int insertIndex);
+void stringInsert(char string[], char insertString[], int insertIndex);
 #endif

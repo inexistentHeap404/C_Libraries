@@ -28,13 +28,13 @@ int find(char string[], char to_find){
 
 // findLast -> returns the last index of where a char was found
 int findLast(char string[], char to_find){
-	int find_index = 0;
-	int i = 0;
-	while(string[i] != '\0'){
+	int i = len(string);
+	int find_index = len(string);
+	while(string[i] != to_find){
 		if(string[i] == to_find){
 			find_index = i;
 		}
-		i++;
+		i--;
 	}
 	return find_index;
 }
@@ -201,4 +201,22 @@ char* stringAppend(char string1[], char string2[]){
 		str2_index++;
 	}
 	return ret;
+}
+
+//stringCharInsert -> takes in a string, a char, and an index. inserts the character at the specified 0-based index. (modifies the original string)
+void stringCharInsert(char string[], char insertChar, int insertIndex){
+	int string_length = len(string);
+	for(int i = string_length; i > insertIndex - 1; i--){
+		string[i + 1] = string[i];
+	}
+	string[insertIndex] = insertChar;
+}
+
+//stringInsert -> takes in two strings and an index, inserts the second string in the specified index of the first string
+void stringInsert(char string[], char insertString[],  int insertIndex){
+	int insertString_length = len(insertString);
+	for(int i = 0; i < insertString_length; i++){
+		stringCharInsert(string, insertString[i], insertIndex);
+		insertIndex++;
+	}
 }
