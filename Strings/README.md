@@ -51,3 +51,18 @@ substr(str, 2, 4, sub);
 printf("%s", sub);
 prints -> "cDe"
 ```
+
+# getCount
+Params and type: string (char[]), toCount (char)\
+Returns: number of occurences of the toCount char in string (int)\
+example:\
+```
+char str[] = "aBcDeFe";
+int a = getCount(str, 'e');
+returns -> 2
+```
+NOTE: The counter is case sensitive.
+
+# split
+Params and type: string (char[]), delim (char)
+Returns: a double pointer **char** to the split string
