@@ -66,3 +66,9 @@ NOTE: The counter is case sensitive.
 # split
 Params and type: string (char[]), delim (char)
 Returns: a double pointer **char** to the split string
+
+
+# upper
+Params and type: string (char[])\
+Returns: void\
+
